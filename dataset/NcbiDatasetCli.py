@@ -1,23 +1,13 @@
-import argparse
 import hashlib
 import logging
 import os
-import shutil  # Used for deleting folders and moving files
 import subprocess
 import zipfile
 from typing import Dict, List, Optional
 
 
 class NCBIDownloader:
-    def __init__(
-        self,
-        data_type: str,
-        index_type: str,
-        identifier: str,
-        output_dir: str,
-        assembly_source: str = "RefSeq",
-        include: str = "genome",
-    ) -> None:
+    def __init__(self,data_type: str,index_type: str,identifier: str,output_dir: str,assembly_source: str = "RefSeq",include: str = "genome",) -> None:
         """
         Initializes the download class, allowing users to control download commands by passing parameters.
 

@@ -1,19 +1,29 @@
 import os
+import json
 from Bio import SeqIO
-from NcbiDatasetCli import NCBIDownloader  # Ensure this module is properly imported
+from NcbiDatasetCli import NCBIDownloader  # Ensure this module is properly installed
 
-class HumanDataset:
-    def __init__(self, taxon_id="9606", download_folder=None, download=True):
+class GenomeDataset:
+    def __init__(self, species, download_folder=None, download=True):
         """
-        Initializes the HumanDataset class to download and load data for a specified organism.
+        Initializes the GenomeDataset class to download and load data for a specified organism.
 
         Parameters:
-        - taxon_id: NCBI Taxonomy ID (e.g., 9606 for Homo sapiens)
-        - download_folder: Directory path to store the downloaded data, defaults to "./human"
+        - species: Species name (e.g., "Homo sapiens")
+        - download_folder: Directory path to store the downloaded data, defaults to "./{species}"
         - download: Whether to download data; if already downloaded, set to False
         """
-        self.taxon_id = taxon_id
-        self.download_folder = download_folder if download_folder else "./human"
+        # Load species-to-taxon_id mapping from JSON file
+        with open("./Datasets_species_taxonid_dict.json", "r") as f:
+            species_taxon_dict = json.load(f)
+
+        # Map species to taxon_id
+        self.taxon_id = species_taxon_dict.get(species)
+        if not self.taxon_id:
+            raise ValueError(f"Species '{species}' not found in the dataset JSON file.")
+        
+        # Set the download folder to the species name if not specified
+        self.download_folder = download_folder if download_folder else f"./{species.replace(' ', '_')}"
 
         # Ensure the download directory exists
         os.makedirs(self.download_folder, exist_ok=True)
@@ -23,7 +33,7 @@ class HumanDataset:
             downloader = NCBIDownloader(
                 data_type="genome",
                 index_type="taxon",
-                identifier=self.taxon_id,  # Use NCBI Taxonomy ID 9606 for Homo sapiens
+                identifier=self.taxon_id,  # Use the mapped taxon_id
                 output_dir=self.download_folder,
                 assembly_source="RefSeq",
                 include="genome"
@@ -76,8 +86,8 @@ class HumanDataset:
 
 # Example usage
 if __name__ == "__main__":
-    # Initialize the HumanDataset class
-    dataset = HumanDataset(taxon_id="9606", download_folder="./human_data", download=True)
+    # Initialize the GenomeDataset class using species name instead of taxon_id
+    dataset = GenomeDataset(species="Escherichia coli", download_folder=None, download=True)
     
     # Load and display genome sequence information
     sequences = dataset.load_sequences()
