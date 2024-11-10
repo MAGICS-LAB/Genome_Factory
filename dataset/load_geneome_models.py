@@ -2,7 +2,7 @@ import torch
 from transformers import AutoTokenizer, AutoModel
 
 class LoadGenomeModels:
-    def __init__(self, model_name="DNABERT", cache_dir=None):
+    def __init__(self, model_name, cache_dir=None):
         """
         Initialize the model loader with the specified model name.
         :param model_name: Name of the model to load, e.g., "DNABERT"
@@ -19,7 +19,7 @@ class LoadGenomeModels:
         """
         Load the model and tokenizer based on the specified model name.
         """
-        if self.model_name == "DNABERT":
+        if self.model_name == "DNABERT-2":
             model_path = "zhihan1996/DNABERT-2-117M"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModel.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
@@ -63,7 +63,7 @@ class LoadGenomeModels:
 # Usage example
 if __name__ == "__main__":
     # Instantiate the model loader
-    genome_model = LoadGenomeModels(model_name="DNABERT")
+    genome_model = LoadGenomeModels(model_name="DNABERT-2")
     
     # DNA sequence to test
     dna_sequence = "ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC"
