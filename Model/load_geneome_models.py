@@ -1,0 +1,53 @@
+import torch
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification
+
+class LoadGenomeModels:
+    def __init__(self, model_name, cache_dir=None):
+        """
+        Initialize the model loader with the specified model name.
+        :param model_name: Name of the model to load, e.g., "DNABERT-2" or "hyenadna"
+        :param cache_dir: Directory to cache the model files
+        """
+        self.model_name = model_name
+        self.cache_dir = cache_dir
+        self.tokenizer = None
+        self.model = None
+        self.load_model()
+
+    def load_model(self):
+        """
+        Load the model and tokenizer based on the specified model name.
+        """
+        if self.model_name == "DNABERT-2":
+            model_path = "zhihan1996/DNABERT-2-117M"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModel.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+        elif self.model_name == "hyenadna":
+            model_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
+        else:
+            raise ValueError(f"Model name '{self.model_name}' is not recognized.")
+
+    def get_model_and_tokenizer(self):
+        """
+        Return the loaded model and tokenizer.
+        :return: Tuple of (model, tokenizer)
+        """
+        return self.model, self.tokenizer
+
+# Usage example
+if __name__ == "__main__":
+    # Instantiate the model loader for DNABERT-2
+    genome_model_dnabert = LoadGenomeModels(model_name="DNABERT-2")
+    
+    # Retrieve the model and tokenizer for DNABERT-2
+    model, tokenizer = genome_model_dnabert.get_model_and_tokenizer()
+    print("Model and Tokenizer for DNABERT-2 loaded:", model, tokenizer)
+    
+    # Instantiate the model loader for hyenadna
+    genome_model_hyenadna = LoadGenomeModels(model_name="hyenadna")
+    
+    # Retrieve the model and tokenizer for hyenadna
+    model, tokenizer = genome_model_hyenadna.get_model_and_tokenizer()
+    print("Model and Tokenizer for hyenadna loaded:", model, tokenizer)
