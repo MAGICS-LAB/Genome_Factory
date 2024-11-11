@@ -1,94 +1,72 @@
-import os
-import json
-from Bio import SeqIO
-from NcbiDatasetCli import NCBIDownloader  # Ensure this module is properly installed
+import torch
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM, AutoConfig, AutoModelForCausalLM
 
-class GenomeDataset:
-    def __init__(self, species, download_folder=None, download=True):
+class LoadGenomeModels:
+    def __init__(self, model_name, cache_dir=None):
         """
-        Initializes the GenomeDataset class to download and load data for a specified organism.
-
-        Parameters:
-        - species: Species name (e.g., "Homo sapiens")
-        - download_folder: Directory path to store the downloaded data, defaults to "./{species}"
-        - download: Whether to download data; if already downloaded, set to False
+        Initialize the model loader with the specified model name.
+        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", "nucleotide-transformer", or "evo-1"
+        :param cache_dir: Directory to cache the model files
         """
-        # Load species-to-taxon_id mapping from JSON file
-        with open("./Datasets_species_taxonid_dict.json", "r") as f:
-            species_taxon_dict = json.load(f)
+        self.model_name = model_name
+        self.cache_dir = cache_dir
+        self.tokenizer = None
+        self.model = None
+        self.load_model()
 
-        # Map species to taxon_id
-        self.taxon_id = species_taxon_dict.get(species)
-        if not self.taxon_id:
-            raise ValueError(f"Species '{species}' not found in the dataset JSON file.")
+    def load_model(self):
+        """
+        Load the model and tokenizer based on the specified model name.
+        """
+        if self.model_name == "DNABERT-2":
+            model_path = "zhihan1996/DNABERT-2-117M"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModel.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
         
-        # Set the download folder to the species name if not specified
-        self.download_folder = download_folder if download_folder else f"./{species.replace(' ', '_')}"
-
-        # Ensure the download directory exists
-        os.makedirs(self.download_folder, exist_ok=True)
-
-        # If download is required, initiate NCBIDownloader
-        if download:
-            downloader = NCBIDownloader(
-                data_type="genome",
-                index_type="taxon",
-                identifier=self.taxon_id,  # Use the mapped taxon_id
-                output_dir=self.download_folder,
-                assembly_source="RefSeq",
-                include="genome"
-            )
-            downloader.download_and_extract()
-
-        # Find all .fna files in the download directory
-        self.fna_files = self.find_fna_files()
-
-    def find_fna_files(self):
-        """
-        Finds all .fna file paths in the download directory.
-
-        Returns:
-        - A list of all .fna file paths
-        """
-        fna_files = []
-        for root, dirs, files in os.walk(self.download_folder):
-            for file in files:
-                if file.endswith(".fna"):
-                    fna_files.append(os.path.join(root, file))
-
-        if not fna_files:
-            raise FileNotFoundError("No .fna files found. Please check if the download was successful.")
+        elif self.model_name == "hyenadna":
+            model_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
         
-        return fna_files
-
-    def load_sequences(self):
-        """
-        Loads genome data from all .fna files and returns brief information.
-
-        Returns:
-        - A list of dictionaries, each containing sequence information including id, description, length, and a truncated sequence.
-        """
-        all_sequences = []
-
-        # Iterate over each .fna file and parse its sequences
-        for fna_file in self.fna_files:
-            with open(fna_file, "rt") as file:
-                for record in SeqIO.parse(file, "fasta"):
-                    sequence_info = {
-                        "id": record.id,
-                        "description": record.description,
-                        "length": len(record.seq),
-                        "sequence": str(record.seq[:100]) + "..."  # Display the first 100 bases
-                    }
-                    all_sequences.append(sequence_info)
+        elif self.model_name == "nucleotide-transformer":
+            model_path = "InstaDeepAI/nucleotide-transformer-2.5b-multi-species"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForMaskedLM.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
         
-        return all_sequences
+        elif self.model_name == "evo-1":
+            model_path = "togethercomputer/evo-1-131k-base"
+            config = AutoConfig.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True, revision="1.1_fix")
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForCausalLM.from_pretrained(model_path, config=config, cache_dir=self.cache_dir, trust_remote_code=True, revision="1.1_fix")
+        
+        else:
+            raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
-# Example usage
+    def get_model_and_tokenizer(self):
+        """
+        Return the loaded model and tokenizer.
+        :return: Tuple of (model, tokenizer)
+        """
+        return self.model, self.tokenizer
+
+# Usage example
 if __name__ == "__main__":
-    # Initialize the GenomeDataset class using species name instead of taxon_id
-    dataset = GenomeDataset(species="Escherichia coli", download_folder=None, download=True)
+    # Instantiate the model loader for DNABERT-2
+    genome_model_dnabert = LoadGenomeModels(model_name="DNABERT-2")
+    model, tokenizer = genome_model_dnabert.get_model_and_tokenizer()
+    print("Model and Tokenizer for DNABERT-2 loaded:", model, tokenizer)
     
-    # Load and display genome sequence information
-    sequences = dataset.load_sequences()
-    print(sequences)
+    # Instantiate the model loader for hyenadna
+    genome_model_hyenadna = LoadGenomeModels(model_name="hyenadna")
+    model, tokenizer = genome_model_hyenadna.get_model_and_tokenizer()
+    print("Model and Tokenizer for hyenadna loaded:", model, tokenizer)
+    
+    # Instantiate the model loader for nucleotide-transformer
+    genome_model_nt_transformer = LoadGenomeModels(model_name="nucleotide-transformer")
+    model, tokenizer = genome_model_nt_transformer.get_model_and_tokenizer()
+    print("Model and Tokenizer for nucleotide-transformer loaded:", model, tokenizer)
+    
+    # Instantiate the model loader for evo-1
+    genome_model_evo = LoadGenomeModels(model_name="evo-1")
+    model, tokenizer = genome_model_evo.get_model_and_tokenizer()
+    print("Model and Tokenizer for evo-1 loaded:", model, tokenizer)

@@ -1,11 +1,11 @@
 import torch
-from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM
 
 class LoadGenomeModels:
     def __init__(self, model_name, cache_dir=None):
         """
         Initialize the model loader with the specified model name.
-        :param model_name: Name of the model to load, e.g., "DNABERT-2" or "hyenadna"
+        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", or "nucleotide-transformer"
         :param cache_dir: Directory to cache the model files
         """
         self.model_name = model_name
@@ -26,6 +26,10 @@ class LoadGenomeModels:
             model_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
+        elif self.model_name == "nucleotide-transformer":
+            model_path = "InstaDeepAI/nucleotide-transformer-2.5b-multi-species"
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForMaskedLM.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
         else:
             raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
@@ -40,14 +44,15 @@ class LoadGenomeModels:
 if __name__ == "__main__":
     # Instantiate the model loader for DNABERT-2
     genome_model_dnabert = LoadGenomeModels(model_name="DNABERT-2")
-    
-    # Retrieve the model and tokenizer for DNABERT-2
     model, tokenizer = genome_model_dnabert.get_model_and_tokenizer()
     print("Model and Tokenizer for DNABERT-2 loaded:", model, tokenizer)
     
     # Instantiate the model loader for hyenadna
     genome_model_hyenadna = LoadGenomeModels(model_name="hyenadna")
-    
-    # Retrieve the model and tokenizer for hyenadna
     model, tokenizer = genome_model_hyenadna.get_model_and_tokenizer()
     print("Model and Tokenizer for hyenadna loaded:", model, tokenizer)
+    
+    # Instantiate the model loader for nucleotide-transformer
+    genome_model_nt_transformer = LoadGenomeModels(model_name="nucleotide-transformer")
+    model, tokenizer = genome_model_nt_transformer.get_model_and_tokenizer()
+    print("Model and Tokenizer for nucleotide-transformer loaded:", model, tokenizer)
