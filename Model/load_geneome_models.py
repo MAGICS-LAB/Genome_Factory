@@ -1,11 +1,11 @@
 import torch
-from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM, AutoConfig, AutoModelForCausalLM
 
 class LoadGenomeModels:
     def __init__(self, model_name, cache_dir=None):
         """
         Initialize the model loader with the specified model name.
-        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", or "nucleotide-transformer"
+        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", "nucleotide-transformer", or "evo-1"
         :param cache_dir: Directory to cache the model files
         """
         self.model_name = model_name
@@ -22,14 +22,23 @@ class LoadGenomeModels:
             model_path = "zhihan1996/DNABERT-2-117M"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModel.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+        
         elif self.model_name == "hyenadna":
             model_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
+        
         elif self.model_name == "nucleotide-transformer":
             model_path = "InstaDeepAI/nucleotide-transformer-2.5b-multi-species"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModelForMaskedLM.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+        
+        elif self.model_name == "evo-1":
+            model_path = "togethercomputer/evo-1-131k-base"
+            config = AutoConfig.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True, revision="1.1_fix")
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
+            self.model = AutoModelForCausalLM.from_pretrained(model_path, config=config, cache_dir=self.cache_dir, trust_remote_code=True, revision="1.1_fix")
+        
         else:
             raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
@@ -56,3 +65,8 @@ if __name__ == "__main__":
     genome_model_nt_transformer = LoadGenomeModels(model_name="nucleotide-transformer")
     model, tokenizer = genome_model_nt_transformer.get_model_and_tokenizer()
     print("Model and Tokenizer for nucleotide-transformer loaded:", model, tokenizer)
+    
+    # Instantiate the model loader for evo-1
+    genome_model_evo = LoadGenomeModels(model_name="evo-1")
+    model, tokenizer = genome_model_evo.get_model_and_tokenizer()
+    print("Model and Tokenizer for evo-1 loaded:", model, tokenizer)

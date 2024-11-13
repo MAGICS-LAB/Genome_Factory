@@ -5,7 +5,7 @@ class LoadGenomeModels:
     def __init__(self, model_name, cache_dir=None):
         """
         Initialize the model loader with the specified model name.
-        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", "nucleotide-transformer", or "evo-1"
+        :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", "nucleotide-transformer", "evo-1", or "caduceus"
         :param cache_dir: Directory to cache the model files
         """
         self.model_name = model_name
@@ -39,6 +39,7 @@ class LoadGenomeModels:
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModelForCausalLM.from_pretrained(model_path, config=config, cache_dir=self.cache_dir, trust_remote_code=True, revision="1.1_fix")
         
+        
         else:
             raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
@@ -70,3 +71,5 @@ if __name__ == "__main__":
     genome_model_evo = LoadGenomeModels(model_name="evo-1")
     model, tokenizer = genome_model_evo.get_model_and_tokenizer()
     print("Model and Tokenizer for evo-1 loaded:", model, tokenizer)
+    
+  
