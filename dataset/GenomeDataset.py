@@ -3,7 +3,7 @@ import json
 from Bio import SeqIO
 from NcbiDatasetCli import NCBIDownloader  # Ensure this module is properly installed
 class GenomeDataset:
-    def __init__(self, species, download_folder=None, download=True):
+    def __init__(self, species:str, download_folder:str=None, download:bool=True):
         """
         Initializes the GenomeDataset class to download and load data for a specified organism.
         Parameters:
@@ -36,7 +36,7 @@ class GenomeDataset:
             downloader.download_and_extract()
         # Find all .fna files in the download directory
         self.fna_files = self.find_fna_files()
-    def find_fna_files(self):
+    def find_fna_files(self)-> list[str]:
         """
         Finds all .fna file paths in the download directory.
         Returns:
@@ -50,7 +50,7 @@ class GenomeDataset:
         if not fna_files:
             raise FileNotFoundError("No .fna files found. Please check if the download was successful.")
         return fna_files
-    def load_sequences(self):
+    def load_sequences(self)-> list[dict]:
         """
         Loads genome data from all .fna files and returns brief information.
         Returns:

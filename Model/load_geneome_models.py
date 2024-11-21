@@ -1,20 +1,21 @@
 import torch
-from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM, AutoConfig, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM, AutoConfig, AutoModelForCausalLM,PreTrainedTokenizer,PreTrainedModel
 
 class LoadGenomeModels:
-    def __init__(self, model_name, cache_dir=None):
+    def __init__(self, model_name: str, cache_dir: str = None):
         """
         Initialize the model loader with the specified model name.
         :param model_name: Name of the model to load, e.g., "DNABERT-2", "hyenadna", "nucleotide-transformer", "evo-1", or "caduceus"
         :param cache_dir: Directory to cache the model files
         """
-        self.model_name = model_name
-        self.cache_dir = cache_dir
-        self.tokenizer = None
-        self.model = None
+        self.model_name: str = model_name
+        self.cache_dir: str = cache_dir
+        self.tokenizer: PreTrainedTokenizer = None
+        self.model: PreTrainedModel = None
         self.load_model()
 
-    def load_model(self):
+
+    def load_model(self) -> None:
         """
         Load the model and tokenizer based on the specified model name.
         """
@@ -46,7 +47,7 @@ class LoadGenomeModels:
         else:
             raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
-    def get_model_and_tokenizer(self):
+    def get_model_and_tokenizer(self) -> tuple[PreTrainedModel, PreTrainedTokenizer]:
         """
         Return the loaded model and tokenizer.
         :return: Tuple of (model, tokenizer)
