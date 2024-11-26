@@ -9,11 +9,11 @@ def benchmark_DNABERT2(benchmark):
         output = 'GUE_data.zip'
 
         # Download the file
-        print("Downloading file...")
+        print("Downloading data...")
         gdown.download(url, output, quiet=False)
 
         # Extract the file to the current directory
-        print("Extracting file...")
+        print("Extracting data...")
         with zipfile.ZipFile(output, 'r') as zip_ref:
             zip_ref.extractall('.')
 
@@ -22,7 +22,6 @@ def benchmark_DNABERT2(benchmark):
 
         # Run the shell script
         command = f'sh run_dnabert2.sh {data_path}'
-        print(f"Executing command: {command}")
         os.system(command)
 benchmark_DNABERT2("GUE")
 
