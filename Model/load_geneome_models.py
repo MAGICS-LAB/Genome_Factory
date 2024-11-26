@@ -56,6 +56,7 @@ class LoadGenomeModels:
 
 # Usage example
 if __name__ == "__main__":
+    
     # Instantiate the model loader for DNABERT-2
     genome_model_dnabert = LoadGenomeModels(model_name="DNABERT-2")
     model, tokenizer = genome_model_dnabert.get_model_and_tokenizer()
