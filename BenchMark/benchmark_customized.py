@@ -72,7 +72,7 @@ def benchmark_model(model, benchmark, per_device_train_batch_size_dict, gradient
             # Model-specific configurations for DNABERT2
             model_name_or_path = "zhihan1996/DNABERT-2-117M"
             train_script = "trainDNABERT2.py"
-            output_dir = "output/dnabert2"
+            output_dir = "output_GUE/dnabert2"
 
             for experiment_name, datasets in experiments.items():
                 # Get the corresponding per_device_train_batch_size and gradient_accumulation_steps
@@ -196,7 +196,7 @@ def benchmark_model(model, benchmark, per_device_train_batch_size_dict, gradient
             # Model-specific configurations for HyenaDNA
             model_name_or_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
             train_script = "trainHyena.py"
-            output_dir = "output/HyenaDNA"
+            output_dir = "output_GUE/HyenaDNA"
 
             for experiment_name, datasets in experiments.items():
                 # Get the corresponding per_device_train_batch_size and gradient_accumulation_steps
@@ -316,12 +316,106 @@ def benchmark_model(model, benchmark, per_device_train_batch_size_dict, gradient
                     # Execute the command
                     run_command(cmd)
 
-        else:
-            raise ValueError("Unsupported model or benchmark")
+
+    if benchmark=="Promoter":
+        data_path = os.path.abspath('.')
+
+        lr = 3e-5
+        vocab=""
+        seed = 42
+        if model == "DNABERT2":
+            # Model-specific configurations for DNABERT2
+            model_name_or_path = "zhihan1996/DNABERT-2-117M"
+            train_script = "trainDNABERT2.py"
+            output_dir = "output_Promoter/dnabert2"
+
+            # Get the corresponding per_device_train_batch_size and gradient_accumulation_steps
+            per_device_train_batch_size = per_device_train_batch_size_dict
+            gradient_accumulation_steps = gradient_accumulation_steps_dict
+
+            
+            model_max_length = 128
+            per_device_eval_batch_size = 16
+            num_train_epochs = 3
+            save_steps = 200
+            eval_steps = 200
+            warmup_steps = 50
+            experiment_name="Promoter"
+            data_full_path = f"{data_path}/Promoter_data"
+            # Build the command
+            cmd = f"""
+            python {train_script} \\
+                --model_name_or_path {model_name_or_path} \\
+                --data_path {data_full_path} \\
+                --kmer -1 \\
+                --run_name {model}_{vocab}_{lr}_{experiment_name}_seed{seed} \\
+                --model_max_length {model_max_length} \\
+                --per_device_train_batch_size {per_device_train_batch_size} \\
+                --per_device_eval_batch_size {per_device_eval_batch_size} \\
+                --gradient_accumulation_steps {gradient_accumulation_steps} \\
+                --learning_rate {lr} \\
+                --num_train_epochs {num_train_epochs} \\
+                --fp16 \\
+                --save_steps {save_steps} \\
+                --output_dir {output_dir} \\
+                --evaluation_strategy steps \\
+                --eval_steps {eval_steps} \\
+                --warmup_steps {warmup_steps} \\
+                --logging_steps 100000 \\
+                --overwrite_output_dir True \\
+                --log_level info \\
+                --find_unused_parameters False \\
+            """
+            run_command(cmd)
+
+        elif model == "HyenaDNA":
+            # Model-specific configurations for HyenaDNA
+            model_name_or_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
+            train_script = "trainHyena.py"
+            output_dir = "output_Promoter/HyenaDNA"
+
+            # Get the corresponding per_device_train_batch_size and gradient_accumulation_steps
+            per_device_train_batch_size = per_device_train_batch_size_dict
+            gradient_accumulation_steps = gradient_accumulation_steps_dict
+
+            
+            model_max_length = 128
+            per_device_eval_batch_size = 16
+            num_train_epochs = 3
+            save_steps = 200
+            eval_steps = 200
+            warmup_steps = 50
+            experiment_name="Promoter"
+            data_full_path = f"{data_path}/Promoter_data"
+            # Build the command
+            cmd = f"""
+            python {train_script} \\
+                --model_name_or_path {model_name_or_path} \\
+                --data_path {data_full_path} \\
+                --kmer -1 \\
+                --run_name {model}_{vocab}_{lr}_{experiment_name}_seed{seed} \\
+                --model_max_length {model_max_length} \\
+                --per_device_train_batch_size {per_device_train_batch_size} \\
+                --per_device_eval_batch_size {per_device_eval_batch_size} \\
+                --gradient_accumulation_steps {gradient_accumulation_steps} \\
+                --learning_rate {lr} \\
+                --num_train_epochs {num_train_epochs} \\
+                --fp16 \\
+                --save_steps {save_steps} \\
+                --output_dir {output_dir} \\
+                --evaluation_strategy steps \\
+                --eval_steps {eval_steps} \\
+                --warmup_steps {warmup_steps} \\
+                --logging_steps 100000 \\
+                --overwrite_output_dir True \\
+                --log_level info \\
+                --find_unused_parameters False \\
+            """
+            run_command(cmd)
 
 def getresult_GUE():
     # Define the output folder path
-    output_folder = os.path.abspath('./output')
+    output_folder = os.path.abspath('./output_GUE')
     results = {}
 
     # Walk through the output folder to find all "results" folders
@@ -345,6 +439,31 @@ def getresult_GUE():
         json.dump(results, outfile, indent=4)
     print(f"Results have been saved to {output_file}")
 
+def getresult_Promoter():
+    # Define the output folder path
+    output_folder = os.path.abspath('./output_Promoter')
+    results = {}
+
+    # Walk through the output folder to find all "results" folders
+    for root, dirs, files in os.walk(output_folder):
+        if 'results' in root:
+            # Inside "results", look for subfolders containing JSON files
+            for subdir in dirs:
+                subdir_path = os.path.join(root, subdir)
+                json_files = [f for f in os.listdir(subdir_path) if f.endswith('.json')]
+                for json_file in json_files:
+                    json_path = os.path.join(subdir_path, json_file)
+                    with open(json_path, 'r') as file:
+                        data = json.load(file)
+                        if 'eval_matthews_correlation' in data:
+                            # Multiply eval_matthews_correlation by 100 and store it
+                            results[subdir] = data['eval_matthews_correlation'] * 100
+
+    # Save the results to All_model_GUE.json
+    output_file = 'All_model_Promoter.json'
+    with open(output_file, 'w') as outfile:
+        json.dump(results, outfile, indent=4)
+    print(f"Results have been saved to {output_file}")
 
 
 
@@ -380,7 +499,7 @@ benchmark_model(
     per_device_train_batch_size_dict=per_device_train_batch_size_dict,
     gradient_accumulation_steps_dict=gradient_accumulation_steps_dict,
 )
-
+'''
 # For HyenaDNA
 benchmark_model(
     model="HyenaDNA",
@@ -388,3 +507,6 @@ benchmark_model(
     per_device_train_batch_size_dict=per_device_train_batch_size_dict,
     gradient_accumulation_steps_dict=gradient_accumulation_steps_dict,
 )
+'''
+#benchmark_model("HyenaDNA","Promoter",16,1)
+#benchmark_model("DNABERT2","Promoter",8,1)
