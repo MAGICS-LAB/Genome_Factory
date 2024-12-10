@@ -1,0 +1,9 @@
+datasets
+evaluate
+deepspeed
+accelerate
+flash_attn
+scikit-learn
+torch
+torchvision
+torchaudio

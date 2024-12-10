@@ -1,0 +1,20 @@
+{   
+    "model_type": "mamba",
+    "auto_map": {
+        "AutoConfig": "configuration_mamba.MambaConfig",
+        "AutoModelForCausalLM": "modeling_mamba.MambaForCausalLM",
+        "AutoModelForSequenceClassification": "modeling_mamba.MambaForSequenceClassification"
+    },
+    "d_model": 768,
+    "n_layer": 24,
+    "vocab_size": 4096,
+    "ssm_cfg": {},
+    "initializer_cfg": {},
+    "rms_norm": true,
+    "norm_epsilon": 1e-5,
+    "residual_in_fp32": true,
+    "fused_add_norm": true,
+    "pad_vocab_size_multiple": 8,
+    "pad_token_id": 2,
+    "classif_dropout": 0.1
+}

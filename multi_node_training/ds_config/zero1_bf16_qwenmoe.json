@@ -1,0 +1,13 @@
+{
+    "zero_optimization": {
+        "stage": 1
+    },
+    "bf16": {
+        "enabled": true
+    },
+    "transformer_moe_cls_names": "Qwen2MoeSparseMoeBlock",
+    "train_micro_batch_size_per_gpu": "auto",
+    "gradient_accumulation_steps": "auto",
+    "communication_data_type": "fp16",
+    "gradient_clipping": 1.0
+}

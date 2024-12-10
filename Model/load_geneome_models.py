@@ -19,6 +19,7 @@ class LoadGenomeModels:
         """
         Load the model and tokenizer based on the specified model name.
         """
+        
         if self.model_name == "DNABERT-2":
             model_path = "zhihan1996/DNABERT-2-117M"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
@@ -27,7 +28,7 @@ class LoadGenomeModels:
         elif self.model_name == "hyenadna":
             model_path = "LongSafari/hyenadna-medium-160k-seqlen-hf"
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
-            self.model = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
+            self.model = AutoModelForSequenceClassification.from_pretrained(model_path,cache_dir=self.cache_dir, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True)
         
         elif self.model_name == "nucleotide-transformer":
             model_path = "InstaDeepAI/nucleotide-transformer-2.5b-multi-species"
@@ -81,3 +82,5 @@ if __name__ == "__main__":
     genome_model_caduceus = LoadGenomeModels(model_name="caduceus")
     model, tokenizer = genome_model_caduceus.get_model_and_tokenizer()
     print("Model and Tokenizer for caduceus loaded:", model, tokenizer)
+    
+    

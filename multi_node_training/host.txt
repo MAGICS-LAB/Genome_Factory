@@ -1,0 +1,2 @@
+0.0.0.0 slots=1
+localhost slots=1
