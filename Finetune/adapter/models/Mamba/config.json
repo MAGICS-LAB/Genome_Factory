@@ -1,0 +1,63 @@
+{
+  "architectures": [
+    "CaduceusForMaskedLM"
+  ],
+  "auto_map": {
+    "AutoConfig": "configuration_caduceus.CaduceusConfig",
+    "AutoModel": "modeling_caduceus.Caduceus",
+    "AutoModelForMaskedLM": "modeling_caduceus.CaduceusForMaskedLM",
+    "AutoModelForSequenceClassification": "modeling_caduceus.CaduceusForSequenceClassification"
+  },
+  "bidirectional": true,
+  "bidirectional_strategy": "add",
+  "bidirectional_weight_tie": true,
+  "complement_map": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 10,
+    "8": 9,
+    "9": 8,
+    "10": 7,
+    "11": 11,
+    "12": 12,
+    "13": 13,
+    "14": 14,
+    "15": 15
+  },
+  "d_model": 1536,
+  "fused_add_norm": true,
+  "initializer_cfg": {
+    "initializer_range": 0.02,
+    "n_residuals_per_layer": 1,
+    "rescale_prenorm_residual": true
+  },
+  "model_type": "caduceus",
+  "n_layer": 3,
+  "norm_epsilon": 1e-05,
+  "pad_vocab_size_multiple": 8,
+  "rcps": true,
+  "residual_in_fp32": false,
+  "rms_norm": true,
+  "ssm_cfg": {
+    "bias": false,
+    "conv_bias": true,
+    "d_conv": 4,
+    "d_state": 16,
+    "dt_init": "random",
+    "dt_init_floor": 0.0001,
+    "dt_max": 0.1,
+    "dt_min": 0.001,
+    "dt_rank": "auto",
+    "dt_scale": 1.0,
+    "expand": 2,
+    "use_fast_path": true
+  },
+  "torch_dtype": "float32",
+  "transformers_version": "4.38.1",
+  "vocab_size": 16
+}

@@ -1,6 +1,11 @@
 import torch
+import os
+import gdown
+import zipfile
 from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification, AutoModelForMaskedLM, AutoConfig, AutoModelForCausalLM,PreTrainedTokenizer,PreTrainedModel
-
+from genslm import GenSLM, SequenceDataset
+import numpy as np
+from torch.utils.data import DataLoader
 class LoadGenomeModels:
     def __init__(self, model_name: str, cache_dir: str = None):
         """
@@ -45,6 +50,21 @@ class LoadGenomeModels:
             self.tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
             self.model = AutoModelForMaskedLM.from_pretrained(model_path, cache_dir=self.cache_dir, trust_remote_code=True)
         
+        elif self.model_name=="genslm":
+            download_url = "https://drive.google.com/uc?id=1pgD5hqlV62JqmVPTEsL1pkmeXEnzpTKZ&export=download"
+
+            zip_filename = "model.zip"
+            gdown.download(download_url, zip_filename, quiet=False)
+            with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
+                zip_ref.extractall('.')
+
+            os.remove(zip_filename)
+            model_temp = GenSLM("genslm_25M_patric", model_cache_dir="./")
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            model_temp.to(device)
+            self.model=model_temp.model
+            self.tokenizer=model_temp.tokenizer
+        
         else:
             raise ValueError(f"Model name '{self.model_name}' is not recognized.")
 
@@ -82,5 +102,9 @@ if __name__ == "__main__":
     genome_model_caduceus = LoadGenomeModels(model_name="caduceus")
     model, tokenizer = genome_model_caduceus.get_model_and_tokenizer()
     print("Model and Tokenizer for caduceus loaded:", model, tokenizer)
+
+    genome_model_genslm = LoadGenomeModels(model_name="genslm")
+    model, tokenizer = genome_model_genslm.get_model_and_tokenizer()
+    print("Model and Tokenizer for genslm loaded:", model, tokenizer)
     
     
