@@ -73,7 +73,7 @@ class GenomeDataset:
 # Example usage
 if __name__ == "__main__":
     # Initialize the GenomeDataset class using species name instead of taxon_id
-    dataset = GenomeDataset(species="Mus musculus", download_folder=None, download=True)
+    dataset = GenomeDataset(species="Homo sapiens", download_folder=None, download=True)
     # Load and display genome sequence information
     sequences = dataset.load_sequences()
     print(sequences)
