@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: genomeAI
+Version: 0.0.1
+Requires-Dist: torch
+Requires-Dist: transformers
+Requires-Dist: peft
+Requires-Dist: scikit-learn
+Requires-Dist: gdown
+Requires-Dist: pyyaml
