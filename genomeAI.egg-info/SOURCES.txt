@@ -1,0 +1,13 @@
+setup.py
+genomeAI/Finetune.py
+genomeAI/Inference.py
+genomeAI/__init__.py
+genomeAI/cli.py
+genomeAI/loraInference.py
+genomeAI/train.py
+genomeAI.egg-info/PKG-INFO
+genomeAI.egg-info/SOURCES.txt
+genomeAI.egg-info/dependency_links.txt
+genomeAI.egg-info/entry_points.txt
+genomeAI.egg-info/requires.txt
+genomeAI.egg-info/top_level.txt
