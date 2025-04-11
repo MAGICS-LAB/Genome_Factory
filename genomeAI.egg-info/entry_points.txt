@@ -1,0 +1,2 @@
+[console_scripts]
+genomeai-cli = genomeAI.cli:main
