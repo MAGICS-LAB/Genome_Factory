@@ -1,0 +1,44 @@
+model:
+  model_name_or_path:  "InstaDeepAI/nucleotide-transformer-500m-1000g" #"LongSafari/hyenadna-medium-160k-seqlen-hf"" #"zhihan1996/DNABERT-2-117M"#pGenomeOcean/GenomeOcean-100M
+
+
+method:
+  finetuning_type: "lora"
+  lora_target: "all"
+  lora_r: [8, 8]  
+  lora_alpha: [32, 32]
+  lora_dropout: [0.05, 0.05]
+  # full means use_lora=False
+
+dataset:
+  data_path: ["/mnt/c/Users/11817/GenomeAI/species_classification", "/mnt/c/Users/11817/GenomeAI/species_classification"]
+  kmer: -1
+
+train:
+  use_flash_attention: true
+  classification: true
+  regression: false
+  run_name: ["full_sft_run", "full_sft_run1"]
+  model_max_length: [128, 128]
+  per_device_train_batch_size: [8, 8]
+  per_device_eval_batch_size: [16, 16]
+  gradient_accumulation_steps: [1, 1]
+  learning_rate: [3.0e-5, 3.0e-5]
+  num_train_epochs: [10, 10]
+  lr_scheduler_type: ["cosine", "cosine"]
+  warmup_ratio: [0.1, 0.1]
+  fp16: false
+  bf16: false
+  ddp_timeout: 180000000
+  logging_steps: [50, 50]
+  save_steps: [50, 50]
+  evaluation_strategy: ["steps", "steps"]
+  eval_steps: [50, 50]
+  warmup_steps: [50, 50]
+  save_total_limit: [3, 3]
+  load_best_model_at_end: true
+  use_wandb: false
+  saved_model_dir: ["./Trained_model666", "./Trained_model6661"]
+output:
+  output_dir: ["output_sft_full", "output_sft_full1"]
+  overwrite_output_dir: true
