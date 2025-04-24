@@ -1,0 +1,15 @@
+model:
+  model_name_or_path: "pGenomeOcean/GenomeOcean-100M"
+
+# method block is optional or minimal
+method:
+  generation: true
+  min_new_tokens: 10
+  max_new_tokens: 10
+  do_sample: true
+  top_p: 0.9
+  temperature: 1.0
+  num_return_sequences: 1
+
+inference:
+  dna: "GCCGCTAAAAAGCGACCAGAATGATCCAAAAAAGAAGGCAGGCCAGCACCATCCGTTTTTTACAGCTCCAGAACTTCCTTT"
