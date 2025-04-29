@@ -1,0 +1,3 @@
+download:
+  species: "Mus musculus"
+  download_folder: "./mouse_data"
