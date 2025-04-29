@@ -91,6 +91,7 @@ Use trained models for prediction or generation:
 Download genomic data from NCBI:
 
 1.  **Using a config file:** Specify download parameters in a YAML file.
+   
     **Download by species:**
     ```bash
     genomeai-cli download genomeAI/examples/download_by_species.yaml
@@ -99,7 +100,7 @@ Download genomic data from NCBI:
     ```bash
     genomeai-cli download genomeAI/examples/download_by_link.yaml
     ```
-2.  **Interactively:** Run the command without a config file and follow the prompts in the terminal to specify your download criteria (supports both species-based and link-based downloads).
+3.  **Interactively:** Run the command without a config file and follow the prompts in the terminal to specify your download criteria (supports both species-based and link-based downloads).
     ```bash
     genomeai-cli download
     ```
