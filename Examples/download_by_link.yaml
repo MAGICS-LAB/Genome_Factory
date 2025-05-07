@@ -1,0 +1,4 @@
+download:
+  link: "https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.1.fa.gz"
+  download_folder: "./666"
+
