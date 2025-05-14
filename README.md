@@ -15,7 +15,7 @@ GenomeBridge is a Python-based integrated library for tuning and deploying genom
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/WeiminWu2000/GenomeBridge.git
+    git clone xxx
     cd GenomeBridge
 
 2.  **Install dependencies:**
