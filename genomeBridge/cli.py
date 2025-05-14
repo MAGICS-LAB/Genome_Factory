@@ -18,7 +18,7 @@ from .command import (
 
 def main():
     parser = argparse.ArgumentParser(
-        description="GenomeAI Command Line Interface"
+        description="GenomeBridge Command Line Interface"
     )
     parser.add_argument("command", choices=["train", "inference", "webui", "download","process"],
                         help="train or inference or webui or download or process")
