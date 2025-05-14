@@ -6,7 +6,7 @@ method:
   finetuning_type: "adapter"
 
 dataset:
-  data_path: ["/mnt/c/Users/11817/GenomeAI/species_classification", "/mnt/c/Users/11817/GenomeAI/species_classification"]
+  data_path: ["./species_classification_1", "./species_classification_2"]
 
 train:
   use_flash_attention: false
