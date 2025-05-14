@@ -1,18 +1,18 @@
 model:
-  model_name_or_path:  "LongSafari/hyenadna-medium-160k-seqlen-hf" #"LongSafari/hyenadna-medium-160k-seqlen-hf"" #"zhihan1996/DNABERT-2-117M"#pGenomeOcean/GenomeOcean-100M
+  model_name_or_path:  "LongSafari/hyenadna-medium-160k-seqlen-hf" 
 
 
 method:
   finetuning_type: "full"
 
 dataset:
-  data_path: ["/mnt/c/Users/11817/GenomeAI/species_classification", "/mnt/c/Users/11817/GenomeAI/species_classification"]
+  data_path: ["./species_classification_0", "./species_classification_1"]
 
 train:
   use_flash_attention: false
   classification: true
   regression: false
-  run_name: ["full_sft_run", "full_sft_run1"]
+  run_name: ["full_sft_run_0", "full_sft_run_1"]
   model_max_length: [128, 128]
   per_device_train_batch_size: [8, 8]
   per_device_eval_batch_size: [16, 16]
@@ -32,7 +32,7 @@ train:
   save_total_limit: [3, 3]
   load_best_model_at_end: true
   use_wandb: false
-  saved_model_dir: ["./Trained_model666", "./Trained_model6661"]
+  saved_model_dir: ["./Trained_model_0", "./Trained_model_1"]
 output:
-  output_dir: ["output_sft_full", "output_sft_full1"]
+  output_dir: ["output_sft_full_0", "output_sft_full_1"]
   overwrite_output_dir: true
