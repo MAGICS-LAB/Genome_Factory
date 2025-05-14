@@ -1,5 +1,5 @@
 setup:
-  root_dir: "/mnt/c/Users/11817/GenomeAI/All_data"
+  root_dir: "./All_data"
   output_dir: "./species_classification1"
   segments_per_species: 100
   segment_length: 10000
