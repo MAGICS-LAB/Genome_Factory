@@ -283,22 +283,3 @@ if __name__ == "__main__":
 
 
 
-'''
-
-genomebridge-cli train genomeBridge/Examples/train_full.yaml
-genomebridge-cli train genomeBridge/Examples/train_lora.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_full.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_extract.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_extract_evo.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_generation_genomeocean.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_generation_evo.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_lora.yaml
-genomebridge-cli inference genomeBridge/Examples/inference_adapter.yaml
-genomebridge-cli webui
-genomebridge-cli download
-genomebridge-cli download genomeBridge/Examples/download_by_link.yaml
-genomebridge-cli download genomeBridge/Examples/download_by_species.yaml
-genomebridge-cli process genomeBridge/Examples/process_data.yaml
-genomebridge-cli train genomeBridge/Examples/train_adapter.yaml
-'''
-
