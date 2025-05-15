@@ -1,7 +1,6 @@
 model:
   model_name_or_path: "pGenomeOcean/GenomeOcean-100M"
 
-# method block is optional or minimal
 method:
   extract: true
 
