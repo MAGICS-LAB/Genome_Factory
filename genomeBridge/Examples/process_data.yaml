@@ -1,6 +1,6 @@
 setup:
   root_dir: "./All_data"
-  output_dir: "./species_classification1"
+  output_dir: "./species_classification"
   segments_per_species: 100
   segment_length: 10000
   train_ratio: 0.7
