@@ -174,7 +174,7 @@ Use trained models for prediction, generation, or embedding extraction:
 
 ## Usage via Web UI
 
-Access all GenomeAI functionalities through a graphical interface:
+Access all GenomeBridge functionalities through a graphical interface:
 
 ```bash
 genomebridge-cli webui
