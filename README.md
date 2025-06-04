@@ -1,5 +1,8 @@
 # GenomeBridge: An Integrated Platform for Tuning and Deploying Genomic Foundation Models
 
+![overview](https://github.com/user-attachments/assets/5999aac8-3e01-4b54-ba3b-2239753c4dd8)
+
+
 GenomeBridge is a Python-based integrated library for tuning and deploying genomic foundation models (GFMs). It simplifies data collection (including downloading DNA sequences from NCBI and preprocessing), offers advanced and efficient tuning methods (full tuning, LoRA, and adapter tuning), and supports inference (embedding extraction and DNA sequence generation) and benchmarking of various GFMs.
 
 ## Supported Models
