@@ -184,3 +184,11 @@ genomebridge-cli webui
 ```
 
 This command launches a web server. Open the provided URL in your browser to use the WebUI.
+
+## Reference
+
+```
+LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models.
+Zheng, Yaowei, Richong Zhang, Junhao Zhang, YeYanhan YeYanhan, and Zheyan Luo.
+In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations), pp. 400-410. 2024.
+```
