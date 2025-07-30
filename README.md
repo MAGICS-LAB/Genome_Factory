@@ -625,7 +625,7 @@ GenomeBridge includes advanced protein sequence generation capabilities that com
 Navigate to the protein generation directory:
 
 ```bash
-cd GenomeBridge/genomeBridge/Protein
+cd GenomeBridge/genomeBridge/inference/protein_generation
 ```
 
 ### 🔬 Model-Specific Usage
