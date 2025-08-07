@@ -1,0 +1,6 @@
+setup:
+  out_dir: promoter_dataset
+  train_ratio: 0.8
+  val_ratio: 0.1
+
+

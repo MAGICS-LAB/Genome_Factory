@@ -1,0 +1,15 @@
+setup:
+  model_name_or_path: "Evo"
+  gen_id: NZ_JAYXHC010000003.1
+  start: 157
+  end: 1698
+  strand: -1
+  prompt_start: 0
+  prompt_end: 600
+  structure_start: 150
+  structure_end: 500
+  num: 100
+  min_seq_len: 1000
+  max_seq_len: 1200
+  foldmason_path: /home/zpt6685/foldmason/bin/foldmason
+  output_prefix: outputs_Evo/gmp
