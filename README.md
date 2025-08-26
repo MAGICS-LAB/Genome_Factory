@@ -88,7 +88,7 @@ Genome-Factory provides tools to prepare data for model fine-tuning. This includ
 *   Gather data downloaded using the `download` command into a single folder.
 *   Run the processing command with a config file:
     ```bash
-    genomefactory-cli process genomeFactory/Examples/process_data.yaml
+    genomefactory-cli process genomeFactory/Examples/process_normal.yaml
     ```
 *   The processed data will be ready for input into the model for fine-tuning.
 
