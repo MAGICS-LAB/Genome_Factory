@@ -1,6 +1,0 @@
-setup:
-  out_dir: epimark_dataset
-  seed: 42
-  train_ratio: 0.8
-  val_ratio: 0.1
-

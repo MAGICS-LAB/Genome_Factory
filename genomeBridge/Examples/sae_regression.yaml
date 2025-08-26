@@ -1,5 +1,0 @@
-setup:
-  type: "first_token"
-  csv_path: "feature_seqlength.csv"
-  sae_checkpoint_path: "/projects/p32572/interprot/interprot/dna_results_dim4096_k64_auxk256_/checkpoints/dnabert2_768_sae4096_k64_auxk256_-step=54000-avg_mse_loss=0.04.ckpt"
-  output_path: "ridge_regression_weights.csv"
