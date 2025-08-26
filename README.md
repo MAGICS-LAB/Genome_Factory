@@ -270,7 +270,7 @@ model_name: "<MODEL_NAME>"
 **A. First-token latent embedding analysis:**
 
 ```bash
-genomefactory-cli sae_train genomeFactory/Examples/sae_regression.yaml
+genomefactory-cli sae_regression genomeFactory/Examples/sae_regression.yaml
 ```
 
 Configure the following parameters in the YAML file:
@@ -285,7 +285,7 @@ type: "first_token"
 **B. Mean-pooled latent embedding analysis:**
 
 ```bash
-genomefactory-cli sae_train genomeFactory/Examples/sae_regression.yaml
+genomefactory-cli sae_regression genomeFactory/Examples/sae_regression.yaml
 ```
 
 Configure the following parameters in the YAML file:
