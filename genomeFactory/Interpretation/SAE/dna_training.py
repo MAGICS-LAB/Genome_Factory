@@ -17,6 +17,7 @@ parser.add_argument("--d-model", type=int, default=768, help="DNABERT-2 embeddin
 parser.add_argument("--d-hidden", type=int, default=4096, help="SAE hidden dimension")
 parser.add_argument("-b", "--batch-size", type=int, default=48, help="Batch size")
 parser.add_argument("--lr", type=float, default=2e-4, help="Learning rate")
+parser.add_argument("--model-name", type=str, default="/projects/p32572/interprot/interprot/nonover_4_mer_BERT", help="Model name")
 parser.add_argument("--k", type=int, default=64, help="Top-k activations")
 parser.add_argument("--auxk", type=int, default=256, help="Auxiliary k")
 parser.add_argument("--dead-steps-threshold", type=int, default=2000, help="Dead neuron threshold")
