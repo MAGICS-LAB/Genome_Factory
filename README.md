@@ -178,70 +178,25 @@ Use trained models for prediction, generation, or embedding extraction:
         ```bash
         genomefactory-cli inference genomeFactory/Examples/inference_extract_evo.yaml
         ```
-
-
-## Usage via Web UI
-
-Access all Genome-Factory functionalities through a graphical interface:
-
-```bash
-genomefactory-cli webui
-```
-
-This command launches a web server. Open the provided URL in your browser to use the WebUI.
-
-## Reference
-
-```
-LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models.
-Zheng, Yaowei, Richong Zhang, Junhao Zhang, YeYanhan YeYanhan, and Zheyan Luo.
-In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations), pp. 400-410. 2024.
-```
-
----
-
-## 🧬 **Advanced Features in Process Data** ⚙️
-
----
-
-Genome-Factory provides specialized dataset generation tools for common genomic machine learning tasks:
-
-**Promoter Region Dataset**: Generate promoter vs. non-promoter classification data from EPDnew database (hg38, mm10, danRer11)
-```bash
-genomefactory-cli process genomeFactory/Examples/process_promoter.yaml
-```
-
-**Epigenetic Mark Dataset**: Create gene body sequences with H3K36me3 signal classification from ENCODE/Roadmap data (hg38, mm10)
-```bash
-genomefactory-cli process genomeFactory/Examples/process_emp.yaml
-```
-
-**Enhancer Region Dataset**: Build enhancer vs. non-enhancer classification data from FANTOM5 annotations (hg38, mm10)
-```bash
-genomefactory-cli process genomeFactory/Examples/process_enhancer.yaml
-```
-
-All datasets feature quality control, configurable train/val/test splits, and output CSV files with `sequence,label` format.
-
-## 🔬 Model Interpretation and Analysis
+### Model Interpretation and Analysis
 
 Genome-Factory provides comprehensive tools for understanding and interpreting genomic foundation models through sparse autoencoder (SAE) interpretation to provide deep insights into model behavior and biological significance.
 
-### 🎯 Key Interpretation Methods
+#### Key Interpretation Methods
 
-#### 🔬 Sparse Autoencoder (SAE) Analysis
-- **🧬 Latent Feature Discovery**: Identify interpretable features learned by genomic foundation models
-- **📈 Ridge Regression Evaluation**: Quantitative assessment of feature importance for downstream tasks
-- **🎯 First-token vs Mean-pooled Analysis**: Compare different pooling strategies for sequence representation
-- **📊 Feature Weight Analysis**: Understand which SAE features contribute most to biological predictions
+##### Sparse Autoencoder (SAE) Analysis
+- ** Latent Feature Discovery**: Identify interpretable features learned by genomic foundation models
+- ** Ridge Regression Evaluation**: Quantitative assessment of feature importance for downstream tasks
+- ** First-token vs Mean-pooled Analysis**: Compare different pooling strategies for sequence representation
+- ** Feature Weight Analysis**: Understand which SAE features contribute most to biological predictions
 
-### 🚀 Quick Start Guide
+####  Quick Start Guide
 
-#### SAE-Based Feature Analysis
+##### SAE-Based Feature Analysis
 
 Complete workflow for SAE training and interpretation:
 
-##### Step 1: Train SAE Model
+###### Step 1: Train SAE Model
 
 ```bash
 genomefactory-cli sae_train genomeFactory/Examples/sae_train.yaml
@@ -266,7 +221,7 @@ num_workers: <NUM_WORKERS>
 model_name: "<MODEL_NAME>"
 ```
 
-##### Step 2: Downstream Evaluations with Ridge Regression
+###### Step 2: Downstream Evaluations with Ridge Regression
 
 **A. First-token latent embedding analysis:**
 
@@ -298,12 +253,32 @@ output_path: "<OUTPUT_CSV_PATH>"
 type: "mean"
 ```
 
-### 📊 Interpretation Output Types
+#### Interpretation Output Types
 
-#### SAE Feature Analysis
+##### SAE Feature Analysis
 - **Latent activation patterns**: Visualization of which SAE features activate for different sequences
 - **Feature importance rankings**: Quantitative ranking of features based on Ridge regression weights
 - **Biological function correlation**: Mapping between SAE features and known biological functions
+
+## Usage via Web UI
+
+Access all Genome-Factory functionalities through a graphical interface:
+
+```bash
+genomefactory-cli webui
+```
+
+This command launches a web server. Open the provided URL in your browser to use the WebUI.
+
+## Reference
+
+```
+LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models.
+Zheng, Yaowei, Richong Zhang, Junhao Zhang, YeYanhan YeYanhan, and Zheyan Luo.
+In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations), pp. 400-410. 2024.
+```
+
+---
 
 ### 📈 Performance Considerations
 
