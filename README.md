@@ -178,7 +178,7 @@ Use trained models for prediction, generation, or embedding extraction:
         ```bash
         genomefactory-cli inference genomeFactory/Examples/inference_extract_evo.yaml
         ```
-### Model Interpretation and Analysis
+### Interpretation
 
 Genome-Factory provides comprehensive tools for understanding and interpreting genomic foundation models through sparse autoencoder (SAE) interpretation to provide deep insights into model behavior and biological significance.
 
