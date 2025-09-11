@@ -277,33 +277,3 @@ LlamaFactory: Unified Efficient Fine-Tuning of 100+ Language Models.
 Zheng, Yaowei, Richong Zhang, Junhao Zhang, YeYanhan YeYanhan, and Zheyan Luo.
 In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations), pp. 400-410. 2024.
 ```
-
----
-
-### 📈 Performance Considerations
-
-- **Memory Usage**: SAE interpretation methods process sequences individually to manage memory efficiently
-- **GPU Acceleration**: Automatically uses CUDA when available for faster inference
-- **Batch Processing**: Supports batch analysis for large-scale genomic datasets
-- **Caching**: Implements intelligent caching for repeated sequence analysis
-- **SAE Training**: Requires substantial computational resources; consider using distributed training for large models
-
-### 🔬 Research Applications
-
-The SAE interpretation framework is particularly useful for:
-
-- **🧬 Promoter Analysis**: Understanding transcription factor binding sites through SAE features
-- **🔬 Variant Effect Prediction**: Analyzing the impact of genetic variants using SAE interpretation methods
-- **📊 Model Interpretability**: Comprehensive insights into what genomic foundation models learn at different levels
-- **🎯 Feature Discovery**: Identifying important sequence motifs and patterns through SAE approaches
-- **🤝 Model Comparison**: Comparing interpretation results across different model architectures
-- **🧪 Mechanistic Understanding**: Understanding learned latent representations
-
-### 🎯 SAE-Based Interpretation Method
-
-**SAE-Based interpretation** is ideal for:
-- **Deep feature analysis and mechanistic understanding**
-- **Advantages**: Interpretable features, quantitative evaluation
-- **Considerations**: Requires additional training
-
-This comprehensive interpretation framework bridges the gap between powerful genomic foundation models and practical biological insights, making it easier for researchers to understand, validate, and trust AI-driven genomic analysis results.
