@@ -1,4 +1,4 @@
-# Genome-Factory: An Integrated Platform for Tuning and Deploying Genomic Foundation Models
+# Genome-Factory: An Integrated Library for Tuning, Deploying, and Interpreting Genomic Models
 
 ![overview](https://github.com/user-attachments/assets/2f5b2446-2f17-460f-8fc8-e7f529697595)
 
