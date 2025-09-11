@@ -418,7 +418,7 @@ def run_inference(config: dict):
             output_file = config.get("inference", {}).get("output_dir", "./embeddings.npy")
             inference_script = os.path.join(
                 os.path.dirname(__file__),
-                "Inference/Extract_Embeddings/evo_extract.py"
+                "Inference/extract_embedding/evo_extract.py"
             )
             cmd = [
                 "python", inference_script,
@@ -433,7 +433,7 @@ def run_inference(config: dict):
             output_file = config.get("inference", {}).get("output_dir", "./embeddings.npy")
             inference_script = os.path.join(
                 os.path.dirname(__file__),
-                "Inference/Extract_Embeddings/extract.py"
+                "Inference/extract_embedding/extract.py"
             )
 
         # Build command: one --dna, then all sequences, then --output_file
