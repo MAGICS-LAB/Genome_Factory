@@ -182,9 +182,7 @@ Use trained models for prediction, generation, or embedding extraction:
 
 Genome-Factory provides comprehensive tools for understanding and interpreting genomic foundation models through sparse autoencoder (SAE) interpretation to provide deep insights into model behavior and biological significance.
 
-#### Key Interpretation Methods
-
-##### Sparse Autoencoder (SAE) Analysis
+#### Sparse Autoencoder (SAE) Analysis
 - ** Latent Feature Discovery**: Identify interpretable features learned by genomic foundation models
 - ** Ridge Regression Evaluation**: Quantitative assessment of feature importance for downstream tasks
 - ** First-token vs Mean-pooled Analysis**: Compare different pooling strategies for sequence representation
@@ -252,13 +250,6 @@ sae_checkpoint_path: "<SAE_CHECKPOINT_PATH>"
 output_path: "<OUTPUT_CSV_PATH>"
 type: "mean"
 ```
-
-#### Interpretation Output Types
-
-##### SAE Feature Analysis
-- **Latent activation patterns**: Visualization of which SAE features activate for different sequences
-- **Feature importance rankings**: Quantitative ranking of features based on Ridge regression weights
-- **Biological function correlation**: Mapping between SAE features and known biological functions
 
 ## Usage via Web UI
 
