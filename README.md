@@ -261,6 +261,19 @@ genomefactory-cli webui
 
 This command launches a web server. Open the provided URL in your browser to use the WebUI.
 
+## Citation
+
+If you find Genome-Factory useful, we would appreciate it if you consider citing our work:
+
+@misc{genomefactory2025,
+  title     = {{GENOME-FACTORY}: An Integrated Library for Tuning, Deploying, and Interpreting Genomic Models},
+  author    = {Weimin Wu and Xuefeng Song and Yibo Wen and Qinjie Lin and Zhihan Zhou and Jerry Yao-Chieh Hu and Zhong Wang and Han Liu},
+  year      = {2025},
+  archivePrefix = {arXiv},
+  url       = {[https://github.com/MAGICS-LAB/Genome_Factory](https://github.com/MAGICS-LAB/Genome_Factory)}
+}
+
+
 ## Reference
 
 ```
