@@ -3,19 +3,20 @@
 ![overview](https://github.com/user-attachments/assets/2f5b2446-2f17-460f-8fc8-e7f529697595)
 
 
-Genome-Factory is a Python-based integrated library for tuning and deploying genomic foundation models (GFMs). It simplifies data collection (including downloading DNA sequences from NCBI and preprocessing), offers advanced and efficient tuning methods (full tuning, LoRA, and adapter tuning), and supports inference (embedding extraction and DNA sequence generation) and benchmarking of various GFMs.
+Genome-Factory is a Python-based integrated library for tuning and deploying genomic foundation models. The framework consists of six components. Genome Collector acquires genomic sequences from public repositories and performs preprocessing (e.g., GC normalization, ambiguous base correction). Model Loader supports major genomic models (e.g., GenomeOcean, EVO, DNABERT-2, HyenaDNA, Caduceus, Nucleotide Transformer) and their tokenizers. Model Trainer configures workflows, adapts models to classification or regression tasks, and executes training with full fine-tuning or parameter-efficient methods (LoRA, adapters). Inference Engine enables embedding extraction and sequence generation. Benchmarker provides standard benchmarks and allows integration of custom evaluation tasks. Biological Interpreter enhances interpretability through sparse auto-encoders.
 
 ## Supported Models
 The "Variant Type" column specifies how model variants differ: by parameter **Size** or by maximum input **Sequence Length**.
 
 | Model Name             | Variant Type    | Variants                                   |
 | ---------------------- | --------------- | ------------------------------------------------ |
-| DNABERT-2              | Size            | 117M                                             |
-| Hyenadna               | Sequence Length | 1K / 16K / 32K / 160K / 450K / 1M              |
-| Nucleotide Transformer | Size            | 50M / 100M / 250M / 500M / 1B / 2.5B             |
-| Caduceus               | Sequence Length | 1K / 131K                                        |
-| GenomeOcean            | Size            | 100M / 500M / 4B                                 |
+| GenomeOcean            | Parameter Size  | 100M / 500M / 4B                                 |
 | EVO                    | Sequence Length | 8K / 131K                                        |
+| DNABERT-2              | Parameter Size            | 117M                                             |
+| Hyenadna               | Sequence Length | 1K / 16K / 32K / 160K / 450K / 1M              |
+| Caduceus               | Sequence Length | 1K / 131K                                        |
+| Nucleotide Transformer | Parameter Size  | 50M / 100M / 250M / 500M / 1B / 2.5B             |
+
 
 ## Installation
 
