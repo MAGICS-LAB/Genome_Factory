@@ -6,7 +6,7 @@
 Genome-Factory is a Python-based integrated library for tuning and deploying genomic foundation models. The framework consists of six components. Genome Collector acquires genomic sequences from public repositories and performs preprocessing (e.g., GC normalization, ambiguous base correction). Model Loader supports major genomic models (e.g., GenomeOcean, EVO, DNABERT-2, HyenaDNA, Caduceus, Nucleotide Transformer) and their tokenizers. Model Trainer configures workflows, adapts models to classification or regression tasks, and executes training with full fine-tuning or parameter-efficient methods (LoRA, adapters). Inference Engine enables embedding extraction and sequence generation. Benchmarker provides standard benchmarks and allows integration of custom evaluation tasks. Biological Interpreter enhances interpretability through sparse auto-encoders.
 
 ## Supported Models
-The "Variant Type" column specifies how model variants differ: by parameter **Size** or by maximum input **Sequence Length**.
+The "Variant Type" column specifies how model variants differ: by **parameter size** or by maximum input **sequence length**.
 
 | Model Name             | Variant Type    | Variants                                   |
 | ---------------------- | --------------- | ------------------------------------------------ |
