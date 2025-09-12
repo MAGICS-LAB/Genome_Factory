@@ -22,8 +22,8 @@ The "Variant Type" column specifies how model variants differ: by **parameter si
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/xxx/Genome-Factory.git
-    cd Genome-Factory
+    git clone https://github.com/xxx/Genome_Factory.git
+    cd Genome_Factory
 2.  **Install dependencies:**
     ```bash
     # Install primary Python dependencies from requirements file
