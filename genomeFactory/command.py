@@ -47,6 +47,49 @@ def run_sae_train(config: dict):
     print("[genomefactory-cli] Running SAE training command:", " ".join(cmd))
     subprocess.run(cmd, check=True)
 
+def run_protein(config: dict):
+    """
+    Run protein prediction using the specified model and configuration.
+    """
+    model_name_or_path = config.get("model", {}).get("model_name_or_path", "Evo")
+    if model_name_or_path.lower() == "evo":
+        protein_script = os.path.join(os.path.dirname(__file__), "Inference/protein_generation/autocomplete_structure_Evo.py")
+    elif model_name_or_path.lower() == "genomeocean":
+        protein_script = os.path.join(os.path.dirname(__file__), "Inference/protein_generation/autocomplete_structure_GO.py")
+
+    
+    gen_id = config.get("setup", {}).get("gen_id", "NZ_JAYXHC010000003.1")
+    start = config.get("setup", {}).get("start", 157)
+    end = config.get("setup", {}).get("end", 1698)
+    strand = config.get("setup", {}).get("strand", -1)
+    prompt_start = config.get("setup", {}).get("prompt_start", 0)
+    prompt_end = config.get("setup", {}).get("prompt_end", 600)
+    structure_start = config.get("setup", {}).get("structure_start", 150)
+    structure_end = config.get("setup", {}).get("structure_end", 500)
+    num = config.get("setup", {}).get("num", 100)
+    min_seq_len = config.get("setup", {}).get("min_seq_len", 1000)
+    max_seq_len = config.get("setup", {}).get("max_seq_len", 1200)
+    foldmason_path = config.get("setup", {}).get("foldmason_path", "/home/zpt6685/foldmason/bin/foldmason")
+    output_prefix = config.get("setup", {}).get("output_prefix", "outputs_Evo/gmp")
+    
+    cmd = [
+        "python", protein_script,
+        "--gen_id", gen_id,
+        "--start", str(start),
+        "--end", str(end),
+        "--strand", str(strand),
+        "--prompt_start", str(prompt_start),
+        "--prompt_end", str(prompt_end),
+        "--structure_start", str(structure_start),
+        "--structure_end", str(structure_end),
+        "--num", str(num),
+        "--min_seq_len", str(min_seq_len),
+        "--max_seq_len", str(max_seq_len),
+        "--foldmason_path", foldmason_path,
+        "--output_prefix", output_prefix
+    ]
+    print("[genomefactory-cli] Running protein command:", " ".join(cmd))
+    subprocess.run(cmd, check=True)
 
     
 def run_process(config: dict):

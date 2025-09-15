@@ -14,6 +14,7 @@ from .command import (
     run_process,
     run_sae_train,
     run_sae_regression,
+    run_protein,
 )
 
 
@@ -21,7 +22,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="GenomeFactory Command Line Interface"
     )
-    parser.add_argument("command", choices=["train", "inference", "webui", "download","process","sae_train","sae_regression"],
+    parser.add_argument("command", choices=["train", "inference", "webui", "download","process","sae_train","sae_regression","protein"],
                         help="train or inference or webui or download or process or sae_train or sae_regression")
     parser.add_argument("config_path", type=str, nargs="?",
                         help="Path to the YAML config file (not required for webui or download)")
@@ -54,7 +55,8 @@ def main():
         run_sae_train(config)
     elif args.command == "sae_regression":
         run_sae_regression(config)
-
+    elif args.command == "protein":
+        run_protein(config)
 
 if __name__ == "__main__":
     main()

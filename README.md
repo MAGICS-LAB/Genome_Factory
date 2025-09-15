@@ -24,6 +24,7 @@ The "Variant Type" column specifies how model variants differ: by **parameter si
     ```bash
     git clone https://github.com/xxx/Genome_Factory.git
     cd Genome_Factory
+    ```
 2.  **Install dependencies:**
     ```bash
     # Install primary Python dependencies from requirements file
@@ -106,6 +107,27 @@ If you have your own dataset, format it as follows:
 *   Place these three CSV files (`train.csv`, `dev.csv`, `test.csv`) together in a single folder.
 *   This folder can then be specified as the input data directory in your training configuration YAML file.
 
+**3. Advanced Processing Features:**
+
+Genome-Factory provides specialized dataset generation tools for common genomic machine learning tasks:
+
+*   Promoter region dataset: Generate promoter vs. non-promoter classification data from the EPDnew database (hg38, mm10, danRer11)
+    ```bash
+    genomefactory-cli process genomeFactory/Examples/process_promoter.yaml
+    ```
+
+*   Epigenetic mark dataset: Create gene body sequences with H3K36me3 signal classification from ENCODE/Roadmap data (hg38, mm10)
+    ```bash
+    genomefactory-cli process genomeFactory/Examples/process_emp.yaml
+    ```
+
+*   Enhancer region dataset: Build enhancer vs. non-enhancer classification data from FANTOM5 annotations (hg38, mm10)
+    ```bash
+    genomefactory-cli process genomeFactory/Examples/process_enhancer.yaml
+    ```
+
+*   All datasets feature quality control, configurable train/val/test splits, and output CSV files with `sequence,label` format.
+
 ### Training
 
 For fine-tuning GFMs, Genome-Factory supports two primary task types: **classification** and **regression**. You specify the desired `task_type` in the training YAML configuration file.
@@ -178,6 +200,22 @@ Use trained models for prediction, generation, or embedding extraction:
         ```bash
         genomefactory-cli inference genomeFactory/Examples/inference_extract_evo.yaml
         ```
+
+4.  **Protein Generation:** (Generate biologically realistic protein sequences with structural constraints via FoldMason integration).
+
+- **Structure-aware generation**: Apply structural constraints during sequence generation
+- **Multi-model support**: Evo and GenomeOcean
+- **Length control**: Flexible sequence lengths
+- **Genomic context**: Condition on specified genomic coordinates
+- **Batch processing**: Generate multiple variants
+
+Run:
+
+```bash
+genomefactory-cli protein genomeFactory/Examples/protein_generation.yaml
+```
+
+
 ### Interpretation
 
 Genome-Factory provides comprehensive tools for understanding and interpreting genomic foundation models through sparse autoencoder (SAE) interpretation to provide deep insights into model behavior and biological significance.
