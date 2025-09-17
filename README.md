@@ -309,7 +309,7 @@ If you find Genome-Factory useful, we would appreciate it if you consider citing
   author    = {Weimin Wu and Xuefeng Song and Yibo Wen and Qinjie Lin and Zhihan Zhou and Jerry Yao-Chieh Hu and Zhong Wang and Han Liu},
   year      = {2025},
   archivePrefix = {arXiv},
-  url       = {https://github.com/MAGICS-LAB/Genome_Factory}
+  url       = {http://arxiv.org/abs/2509.12266}
 }
 ```
 
