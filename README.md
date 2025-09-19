@@ -67,6 +67,7 @@ Genome-Factory uses YAML configuration files to define tasks. Example files are 
 Download genomic data from NCBI:
 
 1.  **Using a config file:** Specify download parameters in a YAML file.
+   
     **Download by species:**
     ```bash
     genomefactory-cli download genomeFactory/Examples/download_by_species.yaml
@@ -75,7 +76,7 @@ Download genomic data from NCBI:
     ```bash
     genomefactory-cli download genomeFactory/Examples/download_by_link.yaml
     ```
-2.  **Interactively:** Run the command without a config file and follow the prompts in the terminal to specify your download criteria (supports both species-based and link-based downloads).
+3.  **Interactively:** Run the command without a config file and follow the prompts in the terminal to specify your download criteria (supports both species-based and link-based downloads).
     ```bash
     genomefactory-cli download
     ```
