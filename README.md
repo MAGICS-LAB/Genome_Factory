@@ -1,4 +1,4 @@
-# [Genome-Factory: An Integrated Library for Tuning, Deploying, and Interpreting Genomic Models](http://arxiv.org/abs/2509.12266)
+# [Genome-Factory: An Integrated Library for Tuning, Deploying, and Interpreting Genomic Models]
 
 ![overview](https://github.com/user-attachments/assets/2f5b2446-2f17-460f-8fc8-e7f529697595)
 
